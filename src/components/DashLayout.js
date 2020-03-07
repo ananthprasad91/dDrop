@@ -10,6 +10,7 @@ import RightColumn from "../components/RightColumn"
 const DashLayout = () => {
     return (
         <Container>
+            <Row></Row>
             <Row>
                 <Col md="4">
                     <LeftColumn />
