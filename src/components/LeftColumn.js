@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import DropDown from "../common/DropDown"
-import axios from "axios"
+import OptionA from "../components/OptionA"
+import OptionB from "../components/OptionB"
+import { dropDownData1 } from "../services/dropDownData"
 
 const LeftColumn = () => {
-    const [users, setUsers] = useState([]);
-    const [currentUser, setCurrentUser] = useState(0)
+    const [option, setOption] = useState("Option A");
 
-    useEffect(() => {
-        async function fetchData() {
-            const res = await axios.get('https://jsonplaceholder.typicode.com/users')
-            setUsers(res.data);
-        }
-        fetchData();
-    }, []);
-
-    const handleDropDownSelect = (currentUser) => {
-        setCurrentUser(currentUser)
+    const handleDropDownSelect = (event) => {
+        setOption(event.target.value)
     }
-
+    const getCurrentOption = () => {
+        if (option === "Option A") {
+            return true
+        }
+        else {
+            return false
+        }
+    }
     return (
-        <DropDown data={users} value={currentUser} onChange={handleDropDownSelect} />
+        <div>
+            <DropDown data={dropDownData1} value={option} onChange={handleDropDownSelect} />
+            {getCurrentOption() ? <OptionA /> : <OptionB />}
+        </div>
     )
 }
 
